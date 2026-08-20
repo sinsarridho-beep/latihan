@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuis Evaluasi Sesi 1: Python & Git</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .code-font { font-family: 'Fira Code', monospace; }
+        
+        .fade-in { animation: fadeIn 0.4s ease-out forwards; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .option-btn {
+            transition: all 0.2s ease;
+        }
+        .option-btn:hover:not(:disabled) {
+            transform: translateX(5px);
+            border-color: #3b82f6;
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+        
+        /* Correct / Wrong States */
+        .correct-ans {
+            background-color: rgba(16, 185, 129, 0.2) !important;
+            border-color: #10b981 !important;
+            color: #34d399 !important;
+        }
+        .wrong-ans {
+            background-color: rgba(239, 68, 68, 0.2) !important;
+            border-color: #ef4444 !important;
+            color: #f87171 !important;
+            opacity: 0.7;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center py-10 px-4">
+
+    <!-- Header -->
+    <header class="max-w-3xl w-full mb-8 text-center fade-in">
+        <div class="inline-block bg-blue-600 p-3 rounded-full mb-4 shadow-lg shadow-blue-500/30">
+            <i class="fa-solid fa-clipboard-check text-2xl text-white"></i>
+        </div>
+        <h1 class="text-3xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Post-Test Sesi 1</h1>
+        <p class="text-slate-400">Uji pemahamanmu tentang Logika, Setup Python, Prompt AI, dan Dasar Git.</p>
+    </header>
+
+    <!-- Quiz Container -->
+    <main id="quiz-container" class="max-w-3xl w-full bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8 shadow-2xl fade-in relative overflow-hidden">
+        
+        <!-- Progress Bar -->
+        <div class="absolute top-0 left-0 w-full h-1.5 bg-slate-700">
+            <div id="progress-bar" class="h-full bg-gradient-to-r from-blue-500 to-emerald-500 transition-all duration-300" style="width: 0%"></div>
+        </div>
+
+        <div id="quiz-content">
+            <!-- Dynamic Content Injected Here -->
+        </div>
+
+    </main>
+
+    <script>
+        const quizData = [
+            {
+                question: "Apa definisi paling tepat mengenai 'Algoritma' dalam ilmu komputer?",
+                options: [
+                    "Bahasa yang digunakan untuk berbicara dengan komputer.",
+                    "Langkah-langkah logis dan terurut untuk menyelesaikan suatu masalah.",
+                    "Aplikasi untuk menulis kode seperti Visual Studio Code.",
+                    "Sistem untuk menyimpan data di internet."
+                ],
+                correctIndex: 1,
+                explanation: "Algoritma ibarat 'resep masakan'. Ia adalah urutan langkah yang spesifik dan logis sebelum diterjemahkan ke dalam bahasa pemrograman."
+            },
+            {
+                question: "Saat pertama kali menginstal Python di Windows, langkah apa yang SANGAT KRUSIAL dan tidak boleh dilewati agar Python bisa dijalankan di terminal?",
+                options: [
+                    "Mencentang kotak 'Add python.exe to PATH' di halaman awal.",
+                    "Mengubah warna tema instalasi menjadi gelap.",
+                    "Mendaftar akun di website Python.org.",
+                    "Menginstal Visual Studio Code secara bersamaan."
+                ],
+                correctIndex: 0,
+                explanation: "Jika 'Add to PATH' tidak dicentang, sistem Windows tidak akan mengenali perintah 'python' saat kamu mengetiknya di Command Prompt atau Terminal."
+            },
+            {
+                question: "Perintah apa dalam bahasa Python yang digunakan untuk menampilkan teks ke layar?",
+                options: [
+                    "show()",
+                    "echo()",
+                    "print()",
+                    "display()"
+                ],
+                correctIndex: 2,
+                explanation: "Dalam Python, perintah <code>print(\"Teks\")</code> adalah cara standar untuk memerintahkan komputer mencetak output ke layar."
+            },
+            {
+                question: "Sebagai calon Mahasiswa IT, bagaimana cara menggunakan AI (seperti ChatGPT/Gemini) yang BENAR saat menemui Error pada kodemu?",
+                options: [
+                    "Menyuruh AI membuatkan seluruh aplikasi agar cepat selesai.",
+                    "Meminta AI memperbaiki kodenya lalu kita langsung copy-paste.",
+                    "Mengirimkan pesan error ke AI dan memintanya memberikan jawaban akhir saja.",
+                    "Mengirimkan error dan meminta AI menjelaskan letak salahnya tanpa memberikan kode jadi."
+                ],
+                correctIndex: 3,
+                explanation: "Menggunakan AI sebagai 'Tutor' (menjelaskan logika yang salah) akan melatih pola pikir komputasionalmu, bukan sekadar menjadi 'tukang copy-paste'."
+            },
+            {
+                question: "Di dalam terminal, perintah Git apa yang digunakan pertama kali untuk memulai (menginisialisasi) pengawasan di sebuah folder lokal?",
+                options: [
+                    "git start",
+                    "git init",
+                    "git begin",
+                    "git remote"
+                ],
+                correctIndex: 1,
+                explanation: "Perintah <code>git init</code> (initialize) akan membuat folder tersembunyi bernama .git yang berfungsi sebagai mesin waktu pencatat sejarah kodingmu."
+            },
+            {
+                question: "Setelah mengubah file kode, kamu ingin menyiapkan/menandai file tersebut sebelum disimpan permanen. Perintah apa yang kamu gunakan?",
+                options: [
+                    "git add .",
+                    "git push",
+                    "git commit",
+                    "git save"
+                ],
+                correctIndex: 0,
+                explanation: "Perintah <code>git add .</code> (dengan titik) digunakan untuk memasukkan SEMUA perubahan file di folder saat ini ke dalam 'ruang tunggu' sebelum di-commit."
+            },
+            {
+                question: "Perintah <code>git commit -m \"Pesan\"</code> berfungsi untuk?",
+                options: [
+                    "Menghubungkan komputer ke internet.",
+                    "Menyimpan status kode saat ini secara lokal beserta catatan perubahannya.",
+                    "Mengubah nama cabang dari master menjadi main.",
+                    "Mengupload kode ke GitHub."
+                ],
+                correctIndex: 1,
+                explanation: "Commit adalah proses menyimpan versi kode secara permanen di laptopmu (lokal). Parameter -m digunakan untuk menyisipkan pesan/catatan."
+            },
+            {
+                question: "Mengapa kita sangat disarankan untuk menjalankan perintah <code>git branch -M main</code> sebelum mengupload kode?",
+                options: [
+                    "Agar kode kita aman dari hacker.",
+                    "Karena 'main' adalah bahasa pemrograman baru.",
+                    "Untuk menyesuaikan nama cabang utama dengan standar baru GitHub.",
+                    "Untuk menghapus riwayat kode yang lama."
+                ],
+                correctIndex: 2,
+                explanation: "Dulu Git menggunakan 'master' sebagai default, tapi GitHub kini menggunakan 'main'. Mengubahnya mencegah error ketidakcocokan nama saat melakukan Push."
+            },
+            {
+                question: "Untuk mengaitkan folder lokal di laptopmu dengan Repository kosong yang ada di web GitHub, perintah apa yang dipakai?",
+                options: [
+                    "git push origin",
+                    "git remote add origin [URL_GITHUB]",
+                    "git connect github",
+                    "git link repository"
+                ],
+                correctIndex: 1,
+                explanation: "Perintah ini memberi tahu Git lokalmu ke alamat URL internet mana ia harus mengirimkan file tersebut nantinya."
+            },
+            {
+                question: "Ini adalah langkah paling akhir. Perintah apa yang bertugas 'menerbangkan' kodemu dari laptop ke server GitHub di internet?",
+                options: [
+                    "git commit",
+                    "git upload origin",
+                    "git pull",
+                    "git push -u origin main"
+                ],
+                correctIndex: 3,
+                explanation: "Perintah <code>git push</code> digunakan untuk mendorong (mengupload) kode dari repository lokal (laptop) ke repository remote (GitHub)."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let hasAnswered = false;
+
+        const quizContent = document.getElementById('quiz-content');
+        const progressBar = document.getElementById('progress-bar');
+
+        function renderQuestion() {
+            hasAnswered = false;
+            const q = quizData[currentQuestion];
+            const progress = ((currentQuestion) / quizData.length) * 100;
+            progressBar.style.width = `${progress}%`;
+
+            let optionsHtml = '';
+            q.options.forEach((opt, index) => {
+                optionsHtml += `
+                    <button onclick="checkAnswer(${index}, this)" class="option-btn w-full text-left p-4 rounded-xl border-2 border-slate-600 bg-slate-900 text-slate-300 font-medium mb-3 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded bg-slate-700 flex items-center justify-center text-sm font-bold text-slate-400 shrink-0">${String.fromCharCode(65 + index)}</span>
+                        ${opt}
+                    </button>
+                `;
+            });
+
+            quizContent.innerHTML = `
+                <div class="fade-in">
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-xs font-bold text-blue-400 bg-blue-900/30 px-3 py-1 rounded-full border border-blue-500/20">Soal ${currentQuestion + 1} dari ${quizData.length}</span>
+                        <span class="text-xs font-bold text-slate-400">Skor: ${score * 10}</span>
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold mb-6 text-white leading-relaxed">
+                        ${q.question}
+                    </h2>
+                    <div class="space-y-1" id="options-container">
+                        ${optionsHtml}
+                    </div>
+                    <div id="feedback-container" class="mt-6 hidden">
+                        <!-- Feedback goes here -->
+                    </div>
+                    <div class="mt-8 flex justify-end">
+                        <button id="next-btn" onclick="nextQuestion()" class="hidden bg-blue-600 hover:bg-blue-500 text-white px-6 py-2.5 rounded-lg font-bold transition-all items-center gap-2">
+                            Lanjut <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function checkAnswer(selectedIndex, btnElement) {
+            if (hasAnswered) return;
+            hasAnswered = true;
+
+            const q = quizData[currentQuestion];
+            const isCorrect = selectedIndex === q.correctIndex;
+            const allBtns = document.querySelectorAll('.option-btn');
+            
+            // Disable all buttons
+            allBtns.forEach((btn, idx) => {
+                btn.disabled = true;
+                btn.classList.remove('hover:not(:disabled)');
+                
+                // Highlight correct answer
+                if (idx === q.correctIndex) {
+                    btn.classList.add('correct-ans');
+                    btn.innerHTML = btn.innerHTML.replace('bg-slate-700', 'bg-emerald-500 text-white').replace(String.fromCharCode(65 + idx), '<i class="fa-solid fa-check"></i>');
+                }
+                // Highlight wrong answer if selected
+                else if (idx === selectedIndex && !isCorrect) {
+                    btn.classList.add('wrong-ans');
+                    btn.innerHTML = btn.innerHTML.replace('bg-slate-700', 'bg-red-500 text-white').replace(String.fromCharCode(65 + idx), '<i class="fa-solid fa-xmark"></i>');
+                }
+            });
+
+            if (isCorrect) score++;
+
+            // Show Feedback
+            const feedbackContainer = document.getElementById('feedback-container');
+            feedbackContainer.classList.remove('hidden');
+            feedbackContainer.classList.add('fade-in');
+            
+            const feedbackColor = isCorrect ? 'emerald' : 'red';
+            const feedbackIcon = isCorrect ? 'fa-circle-check' : 'fa-circle-xmark';
+            const feedbackTitle = isCorrect ? 'Benar Sekali!' : 'Masih Kurang Tepat!';
+
+            feedbackContainer.innerHTML = `
+                <div class="bg-${feedbackColor}-900/20 border border-${feedbackColor}-500/30 p-4 rounded-xl flex items-start gap-3">
+                    <i class="fa-solid ${feedbackIcon} text-${feedbackColor}-400 text-xl mt-0.5"></i>
+                    <div>
+                        <h4 class="font-bold text-${feedbackColor}-400 mb-1">${feedbackTitle}</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">${q.explanation}</p>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('next-btn').classList.remove('hidden');
+            document.getElementById('next-btn').classList.add('inline-flex');
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < quizData.length) {
+                renderQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function showResult() {
+            progressBar.style.width = `100%`;
+            const finalScore = score * 10;
+            let message = "";
+            let icon = "";
+            let colorClass = "";
+
+            if (finalScore >= 80) {
+                message = "Luar Biasa! Kamu sudah sangat siap mengikuti materi perkuliahan algoritma.";
+                icon = "fa-trophy text-yellow-400";
+                colorClass = "text-emerald-400";
+            } else if (finalScore >= 50) {
+                message = "Kerja bagus! Perlu sedikit mengulang materi Git, tapi pemahaman logikamu sudah oke.";
+                icon = "fa-thumbs-up text-blue-400";
+                colorClass = "text-blue-400";
+            } else {
+                message = "Tidak masalah! Programmer terbaik lahir dari banyak error. Coba baca modul materinya sekali lagi ya.";
+                icon = "fa-book-open text-orange-400";
+                colorClass = "text-orange-400";
+            }
+
+            quizContent.innerHTML = `
+                <div class="fade-in text-center py-8">
+                    <i class="fa-solid ${icon} text-6xl mb-6"></i>
+                    <h2 class="text-3xl font-bold mb-2 text-white">Kuis Selesai!</h2>
+                    <p class="text-slate-400 mb-8">Berikut adalah hasil evaluasi belajarmu:</p>
+                    
+                    <div class="bg-slate-900 border border-slate-700 rounded-2xl p-6 md:p-10 mb-8 max-w-sm mx-auto shadow-inner">
+                        <div class="text-6xl font-bold ${colorClass} mb-2">${finalScore}</div>
+                        <div class="text-sm font-semibold text-slate-500 uppercase tracking-widest">Skor Akhir</div>
+                    </div>
+                    
+                    <p class="text-slate-300 mb-8 max-w-lg mx-auto leading-relaxed">${message}</p>
+                    
+                    <button onclick="location.reload()" class="bg-slate-700 hover:bg-slate-600 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg flex items-center gap-2 mx-auto">
+                        <i class="fa-solid fa-rotate-right"></i> Ulangi Kuis
+                    </button>
+                </div>
+            `;
+        }
+
+        // Start Quiz
+        renderQuestion();
+    </script>
+</body>
+</html>
+```eof

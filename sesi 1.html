@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <!-- STREAMING_CHUNK: Setting up HTML boilerplate -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sesi 1: Setup, Kode, & Git Masterclass</title>
+    <title>Sesi 1: Setup Detail, Kode, AI & Git</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- STREAMING_CHUNK: Custom CSS styles -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -49,7 +47,7 @@
             transition: max-height 0.4s ease-out, padding 0.3s ease;
         }
         .accordion-item.active .accordion-content {
-            max-height: 2500px; /* Increased for longer git content */
+            max-height: 2500px;
             padding-bottom: 1rem;
             padding-top: 0.5rem;
         }
@@ -63,20 +61,20 @@
 </head>
 <body class="min-h-screen flex flex-col">
 
-    <!-- STREAMING_CHUNK: Navigation Header -->
-    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50">
+    <!-- Header -->
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="bg-red-600 text-white p-2 rounded-lg shadow-lg">
-                    <i class="fa-solid fa-code-branch"></i>
+                    <i class="fa-solid fa-graduation-cap"></i>
                 </div>
                 <div>
                     <h1 class="font-bold text-sm sm:text-lg leading-tight">Telkom Univ IT Prep</h1>
-                    <p class="text-xs text-slate-400">Sesi 1: Python Dasar & Penguasaan Git</p>
+                    <p class="text-xs text-slate-400">Sesi 1: Python Dasar, AI Helper, & Git Masterclass</p>
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <div class="bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 items-center gap-2 flex">
+                <div class="bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 items-center gap-2 flex shadow-inner">
                     <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
                     <span class="text-xs font-medium text-slate-300">Progress: <span id="progress-text">25%</span></span>
                 </div>
@@ -86,31 +84,27 @@
 
     <div class="flex-1 max-w-7xl mx-auto w-full flex flex-col md:flex-row pt-6 px-4 sm:px-6 lg:px-8 gap-6 pb-12">
         
-        <!-- STREAMING_CHUNK: Sidebar Progress Menu -->
+        <!-- Sidebar Navigation -->
         <aside class="w-full md:w-64 shrink-0">
-            <div class="bg-slate-800 rounded-xl border border-slate-700 sticky top-24 overflow-hidden">
+            <div class="bg-slate-800 rounded-xl border border-slate-700 sticky top-24 overflow-hidden shadow-xl">
                 <div class="p-4 bg-slate-800 border-b border-slate-700">
                     <h2 class="font-semibold text-sm text-slate-200 mb-2">Alur Modul Sesi 1</h2>
-                    <div class="w-full bg-slate-900 rounded-full h-2">
-                        <div id="progress-bar" class="bg-blue-500 h-2 rounded-full transition-all duration-500" style="width: 25%"></div>
+                    <div class="w-full bg-slate-900 rounded-full h-2 shadow-inner">
+                        <div id="progress-bar" class="bg-blue-500 h-2 rounded-full transition-all duration-500 shadow-[0_0_10px_rgba(59,130,246,0.5)]" style="width: 25%"></div>
                     </div>
                 </div>
                 <nav class="p-2 space-y-1">
                     <button onclick="switchTab('tab1')" id="btn-tab1" class="w-full flex items-center gap-3 px-3 py-2.5 bg-blue-600/20 text-blue-400 rounded-lg text-sm font-medium transition-all text-left">
-                        <span class="bg-blue-900 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold">1</span> 
-                        Konsep & Algoritma
+                        <span class="bg-blue-900 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold">1</span> Konsep Dasar
                     </button>
                     <button onclick="switchTab('tab2')" id="btn-tab2" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-700/50 rounded-lg text-sm font-medium transition-all text-left">
-                        <span class="bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold">2</span> 
-                        Instalasi Super Detail
+                        <span class="bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold">2</span> Instalasi Detail
                     </button>
                     <button onclick="switchTab('tab3')" id="btn-tab3" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-700/50 rounded-lg text-sm font-medium transition-all text-left">
-                        <span class="bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold">3</span> 
-                        Ngoding Interaktif
+                        <span class="bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold">3</span> Ngoding & AI
                     </button>
                     <button onclick="switchTab('tab4')" id="btn-tab4" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-700/50 rounded-lg text-sm font-medium transition-all text-left">
-                        <span class="bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold">4</span> 
-                        Hubungkan ke GitHub
+                        <span class="bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold">4</span> Git & GitHub
                     </button>
                 </nav>
             </div>
@@ -118,93 +112,87 @@
 
         <main class="flex-1 min-w-0">
             
-            <!-- STREAMING_CHUNK: Tab 1 - Theory Section (Kept concise) -->
             <!-- TAB 1: KONSEP DASAR -->
             <section id="tab1" class="tab-content active">
-                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 sm:p-8">
-                    <h2 class="text-2xl font-bold mb-3">Selamat Datang, Calon Software Engineer!</h2>
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 sm:p-8 shadow-xl">
+                    <h2 class="text-2xl font-bold mb-3">Selamat Datang di Dunia Pemrograman!</h2>
                     <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                        Sebelum terjun ke koding, mari samakan persepsi. Komputer itu ibarat koki yang sangat cepat bekerja, tapi <b>tidak punya akal sehat</b>. Kita harus memberinya perintah berupa <b>Algoritma</b> (langkah-langkah logis dan terurut). Bahasa yang kita gunakan untuk memberi perintah tersebut adalah <b>Python</b>.
+                        Sebelum terjun ke koding, ingatlah: Komputer itu ibarat koki yang cepat bekerja, tapi <b>tidak punya akal sehat</b>. Kita harus memberinya perintah berupa <b>Algoritma</b> (langkah-langkah logis dan terurut). Bahasa yang kita gunakan untuk menerjemahkan langkah itu ke komputer adalah <b>Python</b>.
                     </p>
-
                     <div class="bg-slate-900 border border-slate-700 rounded-xl p-6 mb-8 flex flex-col md:flex-row items-center gap-6">
                         <div class="flex-1">
-                            <h3 class="text-lg font-bold text-slate-200 mb-2">Kenapa kita butuh GitHub?</h3>
+                            <h3 class="text-lg font-bold text-slate-200 mb-2">Peran AI & GitHub</h3>
                             <p class="text-sm text-slate-400 leading-relaxed mb-4">
-                                Saat ngoding, laptop bisa saja rusak atau file tidak sengaja terhapus. <b>Git</b> adalah sistem "mesin waktu" yang memantau perubahan kodemu. Sedangkan <b>GitHub</b> adalah "Instagram-nya" para programmer; tempat kamu meng-upload kode (dari lokal ke internet) agar aman dan bisa dilihat dosen/HRD perusahaan.
+                                Di era modern, kita menggunakan <b>AI (ChatGPT/Gemini)</b> bukan sebagai joki jawaban instan, melainkan sebagai "Bebek Karet" (Teman diskusi) untuk menjelaskan letak error logika kode kita. Sedangkan <b>GitHub</b> adalah "Instagram-nya" para programmer; wadah portfolio agar kode kita aman di internet dan bisa dipamerkan ke dosen.
                             </p>
                         </div>
-                        <div class="w-full md:w-1/3 flex justify-center text-5xl text-slate-600 gap-4">
-                            <i class="fa-solid fa-laptop text-blue-500"></i>
-                            <i class="fa-solid fa-arrow-right-arrow-left text-slate-500 text-3xl mt-3"></i>
-                            <i class="fa-brands fa-github text-white"></i>
-                        </div>
                     </div>
-
                     <div class="flex justify-end pt-4 border-t border-slate-700">
-                        <button onclick="goToTab('tab2', 25, 50)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2">
-                            Paham, Lanjut Instalasi <i class="fa-solid fa-arrow-right"></i>
+                        <button onclick="goToTab('tab2', 25, 50)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2 shadow-lg shadow-blue-500/20">
+                            Paham Konsepnya, Lanjut Instalasi <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- STREAMING_CHUNK: Tab 2 - Detailed Installation Step-by-step -->
-            <!-- TAB 2: INSTALASI DETAIL -->
+            <!-- TAB 2: INSTALASI SUPER DETAIL -->
             <section id="tab2" class="tab-content">
-                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 sm:p-8">
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 sm:p-8 shadow-xl">
                     <h2 class="text-2xl font-bold mb-2">Instalasi "Senjata" Super Detail</h2>
-                    <p class="text-slate-400 text-sm mb-6">Jangan lewati satu langkah pun. Klik kotak di bawah ini satu per satu secara berurutan.</p>
+                    <p class="text-slate-400 text-sm mb-6">Jangan lewati satu langkah pun. Klik kotak di bawah ini satu per satu secara berurutan agar laptopmu siap dipakai ngoding.</p>
 
                     <div class="space-y-4">
-                        
-                        <!-- Python Install -->
+                        <!-- Python Install Detail -->
                         <div class="accordion-item bg-slate-900 border border-slate-700 rounded-xl overflow-hidden cursor-pointer" onclick="toggleAccordion(this)">
                             <div class="flex items-center justify-between p-4 hover:bg-slate-800 transition-colors">
                                 <div class="flex items-center gap-4">
                                     <i class="fa-brands fa-python text-3xl text-yellow-400"></i>
                                     <div>
                                         <h3 class="font-bold text-slate-200">1. Install Python & Atur PATH</h3>
+                                        <p class="text-xs text-slate-500">Otak utama agar laptop paham bahasa Python</p>
                                     </div>
                                 </div>
                                 <i class="fa-solid fa-chevron-down chevron transition-transform"></i>
                             </div>
                             <div class="accordion-content px-4 bg-slate-900 border-t border-slate-700">
-                                <div class="py-3">
+                                <div class="py-4">
                                     <p class="text-sm text-slate-300 mb-3">Ikuti persis langkah ini agar komputermu tidak <i>error</i> saat membaca kode Python:</p>
-                                    <ul class="list-disc list-outside ml-5 space-y-2 text-sm text-slate-400">
+                                    <ol class="list-decimal list-inside ml-2 space-y-3 text-sm text-slate-400">
                                         <li>Buka website <a href="https://python.org/downloads" target="_blank" class="text-blue-400 hover:underline">python.org/downloads</a> lalu klik tombol kuning "Download Python 3.x".</li>
-                                        <li>Klik dua kali file <code class="text-slate-200 bg-slate-800 px-1 rounded">python-3.x-amd64.exe</code> yang baru di-download.</li>
-                                        <li class="text-red-300 font-semibold bg-red-950/30 p-2 rounded border border-red-900">
-                                            STOP! Di jendela pertama yang muncul, lihat bagian BAWAH layar. Kamu WAJIB mencentang kotak bertuliskan "Add python.exe to PATH". (Jika lupa, kamu harus install ulang!).
+                                        <li>Klik dua kali file installer (biasanya bernama <code class="text-slate-200 bg-slate-800 px-1 rounded">python-3.x-amd64.exe</code>) yang baru saja di-download.</li>
+                                        <li class="text-red-300 font-semibold bg-red-950/40 p-3 rounded-lg border border-red-900/50 flex flex-col gap-1">
+                                            <span class="flex items-center gap-2"><i class="fa-solid fa-triangle-exclamation text-red-500"></i> SANGAT PENTING (JANGAN DI-NEXT DULU):</span> 
+                                            <span>Di halaman pertama instalasi, lihat bagian <b>paling bawah</b> layar. Kamu WAJIB mencentang kotak kecil bertuliskan <b>"Add python.exe to PATH"</b>. (Kalau ini terlewat, terminal tidak akan kenal perintah Python!).</span>
                                         </li>
-                                        <li>Setelah dicentang, klik "Install Now" di bagian atas jendela. Tunggu hingga muncul tulisan "Setup was successful".</li>
-                                        <li><b>Cara Cek:</b> Buka "Command Prompt" (CMD) di Windows, ketik <code>python --version</code> lalu tekan Enter. Jika muncul angka versinya, artinya sukses!</li>
-                                    </ul>
+                                        <li>Setelah dicentang, baru klik <b>"Install Now"</b> di bagian atas jendela. Tunggu hingga muncul tulisan <i>"Setup was successful"</i>.</li>
+                                        <li><b>Cara Cek Keberhasilan:</b> Buka aplikasi "Command Prompt" (CMD) di Windows, ketik <code class="text-emerald-300 bg-black px-1 rounded">python --version</code> lalu tekan Enter. Jika muncul angka versinya (misal: Python 3.12.2), artinya instalasi sempurna!</li>
+                                    </ol>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- VS Code Install -->
+                        <!-- VS Code Install Detail -->
                         <div class="accordion-item bg-slate-900 border border-slate-700 rounded-xl overflow-hidden cursor-pointer" onclick="toggleAccordion(this)">
                             <div class="flex items-center justify-between p-4 hover:bg-slate-800 transition-colors">
                                 <div class="flex items-center gap-4">
                                     <i class="fa-solid fa-code text-3xl text-blue-500"></i>
                                     <div>
                                         <h3 class="font-bold text-slate-200">2. Install VS Code & Ekstensinya</h3>
+                                        <p class="text-xs text-slate-500">Kanvas atau buku tulis tempat kita meracik kode</p>
                                     </div>
                                 </div>
                                 <i class="fa-solid fa-chevron-down chevron transition-transform"></i>
                             </div>
                             <div class="accordion-content px-4 bg-slate-900 border-t border-slate-700">
-                                <div class="py-3">
-                                    <ul class="list-disc list-outside ml-5 space-y-2 text-sm text-slate-400">
-                                        <li>Download VS Code di <a href="https://code.visualstudio.com/" target="_blank" class="text-blue-400 hover:underline">code.visualstudio.com</a>. Install dengan menekan "Next" terus menerus.</li>
-                                        <li>Buka aplikasi VS Code.</li>
-                                        <li>Di sisi kiri paling pinggir, ada deretan ikon. Klik ikon ke-5 (bentuknya seperti 4 kotak, namanya <b>Extensions</b>).</li>
-                                        <li>Di kotak pencarian, ketik <code class="text-slate-200">Python</code>.</li>
-                                        <li>Pilih hasil teratas (dari Microsoft), lalu klik tombol biru <b>Install</b>. Ini membuat kodemu jadi berwarna-warni dan mudah dibaca.</li>
-                                    </ul>
+                                <div class="py-4">
+                                    <ol class="list-decimal list-inside ml-2 space-y-3 text-sm text-slate-400">
+                                        <li>Download VS Code di <a href="https://code.visualstudio.com/" target="_blank" class="text-blue-400 hover:underline">code.visualstudio.com</a>. Klik tombol biru "Download for Windows/Mac".</li>
+                                        <li>Buka installer-nya dan klik "Next" terus menerus sampai selesai.</li>
+                                        <li>Buka aplikasi VS Code yang sudah terinstall.</li>
+                                        <li>Di menu sebelah kiri paling pinggir, klik ikon <b>Extensions</b> (bentuknya seperti 4 kotak, atau tekan shortcut `Ctrl+Shift+X`).</li>
+                                        <li>Di kolom pencarian (atas), ketik <b>"Python"</b>.</li>
+                                        <li>Pilih hasil teratas yang pembuatnya adalah <b>"Microsoft"</b> (biasanya ada centang biru), lalu klik tombol biru <b>Install</b>. Selesai! Ini membuat kodemu jadi berwarna-warni dan mudah dibaca.</li>
+                                    </ol>
                                 </div>
                             </div>
                         </div>
@@ -215,140 +203,188 @@
                                 <div class="flex items-center gap-4">
                                     <i class="fa-brands fa-git-alt text-3xl text-orange-500"></i>
                                     <div>
-                                        <h3 class="font-bold text-slate-200">3. Install Git & Daftar Akun GitHub</h3>
+                                        <h3 class="font-bold text-slate-200">3. Install Git & Konfigurasi Awal (Wajib)</h3>
+                                        <p class="text-xs text-slate-500">Sistem mesin waktu dan penghubung ke akun GitHub</p>
                                     </div>
                                 </div>
                                 <i class="fa-solid fa-chevron-down chevron transition-transform"></i>
                             </div>
                             <div class="accordion-content px-4 bg-slate-900 border-t border-slate-700">
-                                <div class="py-3">
-                                    <p class="text-sm text-slate-300 font-semibold mb-2">A. Membuat Akun (Di Internet):</p>
-                                    <ul class="list-disc list-outside ml-5 space-y-1 text-sm text-slate-400 mb-4">
-                                        <li>Buka <a href="https://github.com" target="_blank" class="text-blue-400 hover:underline">github.com</a></li>
-                                        <li>Klik <b>Sign Up</b>. Masukkan email kampus atau email utamamu.</li>
-                                        <li>Buat <i>username</i> yang profesional (misal: <code class="text-slate-300">athaya-dev</code>). Jangan pakai nama alay karena akan dilihat dosen/HRD!</li>
-                                        <li>Verifikasi emailmu.</li>
+                                <div class="py-4">
+                                    <p class="text-sm text-slate-200 font-bold mb-2">A. Membuat Akun (Di Internet):</p>
+                                    <ul class="list-disc list-inside ml-2 space-y-1 text-sm text-slate-400 mb-5">
+                                        <li>Buka <a href="https://github.com" target="_blank" class="text-blue-400 hover:underline">github.com</a> lalu klik <b>Sign Up</b>.</li>
+                                        <li>Masukkan email kampus atau email utamamu.</li>
+                                        <li>Buat <i>username</i> yang profesional (misal: <code class="text-slate-300">athaya-dev</code>). Jangan pakai nama aneh karena akan dilihat dosen!</li>
+                                        <li>Buka emailmu dan masukkan kode verifikasi dari GitHub.</li>
                                     </ul>
 
-                                    <p class="text-sm text-slate-300 font-semibold mb-2">B. Instalasi Git (Di Laptop):</p>
-                                    <ul class="list-disc list-outside ml-5 space-y-2 text-sm text-slate-400 mb-4">
-                                        <li>Download Git dari <a href="https://git-scm.com/downloads" target="_blank" class="text-blue-400 hover:underline">git-scm.com</a> untuk Windows.</li>
-                                        <li>Buka installernya. Tampilannya akan sangat banyak pilihan. <b>JANGAN BINGUNG</b>, cukup klik <b>"Next"</b> terus-menerus sampai selesai! Biarkan semuanya <i>default</i>.</li>
+                                    <p class="text-sm text-slate-200 font-bold mb-2">B. Instalasi Git (Di Laptop):</p>
+                                    <ul class="list-disc list-inside ml-2 space-y-1 text-sm text-slate-400 mb-5">
+                                        <li>Download Git dari <a href="https://git-scm.com/downloads" target="_blank" class="text-blue-400 hover:underline">git-scm.com</a> untuk OS milikmu.</li>
+                                        <li>Buka installernya. Nanti tampilannya akan sangat banyak pilihan dan <i>checkbox</i>. <b>JANGAN BINGUNG</b>, cukup klik <b>"Next"</b> terus-menerus sampai tombol berubah jadi "Install"! Biarkan semuanya <i>default</i> bawaan pabrik.</li>
                                     </ul>
 
-                                    <p class="text-sm text-emerald-300 font-semibold mb-2">C. Berkenalan / Konfigurasi Git (WAJIB):</p>
-                                    <p class="text-xs text-slate-400 mb-2">Setelah terinstall, laptopmu punya Git, tapi Git-nya belum tahu siapa kamu. Kita harus berkenalan. Buka aplikasi bernama <b>"Git Bash"</b> di Windows (cari di menu Start).</p>
-                                    <div class="bg-black p-3 rounded-lg border border-slate-700 space-y-2 mb-2 font-mono text-xs">
-                                        <div><span class="text-slate-500"># Ketik ini lalu Enter (ganti dengan namamu):</span><br><span class="text-green-400">$</span> <span class="text-slate-200">git config --global user.name "Nama Lengkapmu"</span></div>
-                                        <div><span class="text-slate-500"># Ketik ini lalu Enter (ganti dengan email github-mu):</span><br><span class="text-green-400">$</span> <span class="text-slate-200">git config --global user.email "emailmu@gmail.com"</span></div>
+                                    <p class="text-sm text-emerald-300 font-bold mb-2 flex items-center gap-2"><i class="fa-solid fa-handshake"></i> C. Berkenalan / Konfigurasi Git (PENTING):</p>
+                                    <p class="text-xs text-slate-400 mb-3 leading-relaxed">Setelah terinstall, Git di laptopmu belum tahu siapa pemiliknya. Kita harus berkenalan. Buka "Command Prompt" (CMD) atau aplikasi "Git Bash" (cari di menu Start). Ketik dua perintah ini satu per satu (ganti dengan nama dan emailmu), lalu tekan Enter setelah tiap baris:</p>
+                                    
+                                    <div class="bg-black p-4 rounded-xl border border-slate-700 space-y-3 mb-2 font-mono text-xs">
+                                        <div>
+                                            <span class="text-slate-500 block mb-1"># Baris pertama (Ganti dengan namamu):</span>
+                                            <span class="text-emerald-400">C:\Users\Athaya></span> <span class="text-slate-200">git config --global user.name "Athaya"</span>
+                                        </div>
+                                        <div>
+                                            <span class="text-slate-500 block mb-1"># Baris kedua (Ganti dengan email Githubmu):</span>
+                                            <span class="text-emerald-400">C:\Users\Athaya></span> <span class="text-slate-200">git config --global user.email "athaya@gmail.com"</span>
+                                        </div>
                                     </div>
-                                    <p class="text-xs text-slate-500 italic">Langkah konfigurasi ini cukup dilakukan <b>1 kali seumur hidup</b> di laptopmu.</p>
+                                    <div class="bg-blue-900/30 border border-blue-500/30 p-3 rounded-lg flex items-start gap-3 mt-3">
+                                        <i class="fa-solid fa-circle-info text-blue-400 mt-0.5"></i>
+                                        <p class="text-xs text-blue-200 leading-relaxed"><b>Ciri-ciri Berhasil:</b> Jika setelah ditekan Enter tidak muncul pesan apa-apa (langsung kembali ke tulisan folder <code>C:\Users\..></code>), maka itu <b>100% SUKSES!</b> Git sengaja bekerja dalam diam. Langkah kenalan ini cukup dilakukan 1 kali seumur hidup di laptopmu.</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="mt-8 flex justify-end pt-4 border-t border-slate-700">
-                        <button onclick="goToTab('tab3', 50, 75)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2">
-                            Aplikasi Terinstal! Mari Ngoding <i class="fa-solid fa-arrow-right"></i>
+                        <button onclick="goToTab('tab3', 50, 75)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2 shadow-lg shadow-blue-500/20">
+                            Semua Alat Siap! Mari Ngoding <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- STREAMING_CHUNK: Tab 3 - Coding Practice -->
-            <!-- TAB 3: NGODING -->
+            <!-- TAB 3: NGODING & AI HELPER -->
             <section id="tab3" class="tab-content">
-                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 sm:p-8">
-                    <h2 class="text-2xl font-bold mb-2">Simulasi Ngoding di VS Code</h2>
-                    <p class="text-slate-400 text-sm mb-6">
-                        Dalam praktik asli, kamu akan membuat folder, membukanya di VS Code, lalu membuat file berakhiran <code>.py</code>. Di bawah ini adalah simulasi menulis perintah dasar Python.
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 sm:p-8 shadow-xl">
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                        <h2 class="text-2xl font-bold">Langkah 3: Ngoding & Kolaborasi AI</h2>
+                        <div class="bg-blue-500/10 text-blue-400 border border-blue-500/20 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-2">
+                            <i class="fa-solid fa-robot"></i> Menggunakan AI dengan Benar
+                        </div>
+                    </div>
+                    
+                    <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                        Dalam praktik asli, kamu akan membuat folder, membukanya di VS Code, lalu membuat file berakhiran <code>.py</code>. Di bawah ini adalah simulasi menulis perintah dasar Python. <br><br>
+                        Di Telkom University nanti, kamu akan sering bertemu tulisan merah <i>(Error)</i>. Jangan panik, AI (ChatGPT/Gemini) akan membantu kita menjelaskan logika yang salah, bukan memberi jawaban joki.
                     </p>
 
-                    <!-- Mock Editor -->
-                    <div class="bg-[#1e1e1e] rounded-xl border border-slate-700 overflow-hidden shadow-2xl mb-6 font-mono text-sm">
+                    <!-- Kode Area -->
+                    <div class="bg-[#1e1e1e] rounded-xl border border-slate-700 overflow-hidden shadow-2xl mb-6 font-mono text-sm relative">
                         <div class="bg-[#2d2d2d] px-4 py-2 flex items-center justify-between border-b border-slate-700">
                             <div class="flex items-center gap-3">
                                 <i class="fa-brands fa-python text-blue-400"></i>
                                 <span class="text-slate-300 text-xs">biodata.py</span>
                             </div>
-                            <button onclick="runCode()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1 rounded text-xs font-bold transition-colors flex items-center gap-1">
+                            <button onclick="runCode()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-1.5 rounded text-xs font-bold transition-colors flex items-center gap-1 shadow-lg">
                                 <i class="fa-solid fa-play"></i> Run Code
                             </button>
                         </div>
                         <div class="flex">
                             <div class="bg-[#1e1e1e] border-r border-slate-700 text-slate-500 p-4 text-right select-none w-12" id="line-numbers">1<br>2</div>
-                            <textarea id="code-editor" class="w-full h-32 p-4 code-font bg-transparent" spellcheck="false" oninput="updateLineNumbers()">print("Halo, nama saya Athaya")&#10;print("Saya maba Teknik Informatika")</textarea>
+                            <!-- Kesalahan sengaja disisipkan di baris 2 untuk memicu AI Helper -->
+                            <textarea id="code-editor" class="w-full h-32 p-4 code-font bg-transparent" spellcheck="false" oninput="updateLineNumbers()">print("Halo, nama saya Athaya")&#10;print("Saya siap masuk Teknik Informatika!)</textarea>
                         </div>
                     </div>
 
-                    <div class="bg-black rounded-xl p-4 font-mono text-sm border border-slate-700 h-32 overflow-y-auto mb-6">
+                    <div class="bg-black rounded-xl p-4 font-mono text-sm border border-slate-700 h-32 overflow-y-auto mb-6 shadow-inner">
                         <div class="text-slate-500 text-xs mb-2">TERMINAL OUTPUT:</div>
-                        <div id="code-output" class="text-slate-300 break-words whitespace-pre-wrap"></div>
+                        <div id="code-output" class="text-slate-300 break-words whitespace-pre-wrap">Coba klik tombol 'Run Code' hijau di atas! Ada satu kesalahan sengaja di baris ke-2 (kurang tanda kutip).</div>
+                    </div>
+
+                    <!-- PANDUAN PROMPT AI UTAMA (Selalu Tampil) -->
+                    <div class="bg-slate-900 border border-slate-700 rounded-xl p-5 mb-6">
+                        <h3 class="text-slate-200 font-bold flex items-center gap-2 mb-2 text-sm">
+                            <i class="fa-solid fa-wand-magic-sparkles text-purple-400"></i> Cara Meminta Bantuan AI (ChatGPT/Gemini)
+                        </h3>
+                        <p class="text-xs text-slate-400 mb-3">
+                            Jika kamu menemui error, copy teks merah di terminal hitam, lalu gunakan template Prompt ini di chat AI mu:
+                        </p>
+                        <div class="relative">
+                            <div class="bg-slate-800 p-3.5 rounded-lg border border-slate-600 text-xs text-emerald-300 italic pr-12 leading-relaxed">
+                                "Saya sedang belajar Python dan mendapat pesan error ini: <b>[PASTE_ERROR_DI_SINI]</b>. Tolong jelaskan kenapa error ini terjadi dan di mana letak kesalahan logika saya. <b>TAPI, jangan berikan kodenya yang benar!</b> Biar saya yang memperbaikinya sendiri."
+                            </div>
+                            <button onclick="copyPrompt()" class="absolute top-3 right-3 text-slate-400 hover:text-white bg-slate-700 hover:bg-slate-600 p-2 rounded transition-colors" title="Copy Prompt ke Clipboard">
+                                <i class="fa-regular fa-copy"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- AI Helper Alert Dinamis -->
+                    <div id="ai-helper" class="bg-red-950/60 border border-red-500/50 rounded-xl p-4 hidden transition-all mb-6 animate-pulse">
+                        <div class="flex items-start gap-3">
+                            <div class="bg-red-500/20 p-2 rounded-full mt-1"><i class="fa-solid fa-bug text-red-400 text-lg"></i></div>
+                            <div>
+                                <h4 class="text-red-400 font-bold text-sm mb-1">Oh tidak, kodenya Error!</h4>
+                                <p class="text-xs text-slate-300 mb-2 leading-relaxed">Ini hal yang sangat wajar! Kelihatannya ada tanda kutip penutup <code>"</code> yang terlupa di ujung kalimat baris ke-2. Gunakan template prompt AI di atas untuk latihan bertanya ke ChatGPT, atau langsung tambahkan kutipnya di teks kodemu dan klik <b>Run</b> lagi.</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="flex justify-between items-center pt-4 border-t border-slate-700 mt-6">
-                        <p class="text-xs text-slate-400">Pastikan kodemu tidak ada yang <i>error</i> sebelum lanjut menyimpan ke Git.</p>
-                        <button onclick="goToTab('tab4', 75, 100)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2">
-                            Kode Berhasil! Lanjut Push ke Github <i class="fa-solid fa-arrow-right"></i>
+                        <p class="text-xs text-slate-400"><i class="fa-solid fa-info-circle text-blue-400"></i> Perbaiki dulu kodenya sampai tulisan '> Selesai' muncul.</p>
+                        <button onclick="goToTab('tab4', 75, 100)" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2 shadow-lg shadow-blue-500/20">
+                            Kode Sukses! Lanjut Git <i class="fa-solid fa-arrow-right"></i>
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- STREAMING_CHUNK: Tab 4 - Full Git Workflow Simulation -->
-            <!-- TAB 4: GIT SIMULATOR DETAIL -->
+            <!-- TAB 4: GIT SIMULATOR DETAIL (With branch -M main) -->
             <section id="tab4" class="tab-content">
-                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 sm:p-8">
-                    <h2 class="text-2xl font-bold mb-2 text-emerald-400"><i class="fa-brands fa-git-alt"></i> Menghubungkan Laptop ke GitHub</h2>
-                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
-                        Langkah ini adalah yang paling sering membingungkan pemula. Bagaimana caranya memindahkan file <code>biodata.py</code> yang ada di laptop ke akun GitHub milikmu di internet? Berikut adalah alur lengkapnya.
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 sm:p-8 shadow-xl">
+                    <h2 class="text-2xl font-bold mb-2 text-emerald-400"><i class="fa-brands fa-git-alt"></i> Final: Menghubungkan Laptop ke GitHub</h2>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Sekarang kita akan mengunggah file kode yang sudah sukses tadi ke Internet. Kita akan menggunakan alur modern (mengubah nama cabang lokal dari `master` menjadi `main` menggunakan <code>-M</code> agar sesuai dengan standar GitHub).
                     </p>
 
-                    <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl mb-6">
-                        <h4 class="font-bold text-slate-200 mb-2">Step 1: Buat "Wadah" (Repository) kosong di web GitHub</h4>
-                        <ol class="list-decimal list-inside text-xs text-slate-400 space-y-1 ml-2">
-                            <li>Buka web Github.com, klik tombol hijau <b>"New Repository"</b>.</li>
-                            <li>Beri nama: <code class="text-slate-200">tugas-python-1</code>.</li>
-                            <li>Klik tombol hijau <b>"Create repository"</b> di paling bawah.</li>
-                            <li>Akan muncul halaman berisi kode-kode (Link URL Repositori-mu). <b class="text-yellow-400">Copy URL (link) tersebut!</b></li>
+                    <div class="bg-slate-900 border border-slate-700 p-4 rounded-xl mb-5">
+                        <h4 class="font-bold text-slate-200 mb-2 text-sm"><i class="fa-solid fa-globe text-blue-400"></i> Step 1: Buat Wadah (Repository) di web GitHub</h4>
+                        <ol class="list-decimal list-inside text-xs text-slate-400 space-y-1 ml-1">
+                            <li>Buka Github.com, login, klik tombol hijau <b>"New Repository"</b>.</li>
+                            <li>Beri nama repo bebas (misal: <code class="text-slate-200">tugas-python</code>), lalu klik "Create repository".</li>
+                            <li>Akan muncul halaman yang banyak kodenya. <b class="text-yellow-400">Copy URL (link) di bagian atas!</b></li>
                         </ol>
                     </div>
 
-                    <p class="text-sm text-slate-300 font-semibold mb-3">Step 2: Ketik mantra ini di Terminal VS Code laptopmu (Simulasi di bawah):</p>
+                    <p class="text-sm text-slate-300 font-semibold mb-3">Step 2: Ketikkan 6 mantra wajib ini berurutan di Terminal Simulasi di bawah:</p>
                     
                     <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700 mb-4 text-xs text-slate-300 space-y-3">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 border-b border-slate-700/50 pb-2">
-                            <code class="bg-black px-2 py-1 rounded text-blue-400 font-bold shrink-0 w-32">git init</code>
-                            <span>(1) Memulai mesin waktu Git di folder laptopmu ini.</span>
+                        <div class="flex items-center gap-3 border-b border-slate-700/50 pb-2 hover:bg-slate-800/50 transition-colors p-1 rounded">
+                            <code class="bg-black px-2 py-1 rounded text-blue-400 font-bold shrink-0 w-40 text-center shadow-inner">git init</code>
+                            <span>(1) Memulai pengawasan mesin waktu Git di folder ini.</span>
                         </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 border-b border-slate-700/50 pb-2">
-                            <code class="bg-black px-2 py-1 rounded text-blue-400 font-bold shrink-0 w-32">git add .</code>
-                            <span>(2) Menandai SEMUA file di folder ini untuk disiapkan.</span>
+                        <div class="flex items-center gap-3 border-b border-slate-700/50 pb-2 hover:bg-slate-800/50 transition-colors p-1 rounded">
+                            <code class="bg-black px-2 py-1 rounded text-blue-400 font-bold shrink-0 w-40 text-center shadow-inner">git add .</code>
+                            <span>(2) Menandai SEMUA file untuk disiapkan ke dalam koper Git.</span>
                         </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 border-b border-slate-700/50 pb-2">
-                            <code class="bg-black px-2 py-1 rounded text-blue-400 font-bold shrink-0 w-32 truncate">git commit -m "..."</code>
-                            <span>(3) Menyimpan versi saat ini secara lokal di laptop.</span>
+                        <div class="flex items-center gap-3 border-b border-slate-700/50 pb-2 hover:bg-slate-800/50 transition-colors p-1 rounded">
+                            <code class="bg-black px-2 py-1 rounded text-blue-400 font-bold shrink-0 w-40 text-center truncate shadow-inner">git commit -m "oke"</code>
+                            <span>(3) Menyimpan status saat ini (checkpoint) di laptop secara permanen.</span>
                         </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2 border-b border-slate-700/50 pb-2">
-                            <code class="bg-black px-2 py-1 rounded text-orange-400 font-bold shrink-0 w-32">git remote add origin [URL_REPO_GITHUB]</code>
-                            <span>(4) <b>KRUSIAL:</b> Menghubungkan folder di laptop ke link wadah kosong di GitHub tadi!</span>
+                        <div class="flex items-center gap-3 border-b border-slate-700/50 pb-2 hover:bg-slate-800/50 transition-colors p-1 rounded">
+                            <code class="bg-black px-2 py-1 rounded text-purple-400 font-bold shrink-0 w-40 text-center shadow-inner">git branch -M main</code>
+                            <span>(4) <b>PENTING:</b> Mengubah nama cabang menjadi 'main' agar terhindar dari error.</span>
                         </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <code class="bg-black px-2 py-1 rounded text-emerald-400 font-bold shrink-0 w-32">git push -u origin master</code>
-                            <span>(5) <b>AKSI FINAL:</b> Mendorong file dari laptop naik (upload) ke internet!</span>
+                        <div class="flex items-center gap-3 border-b border-slate-700/50 pb-2 hover:bg-slate-800/50 transition-colors p-1 rounded">
+                            <code class="bg-black px-2 py-1 rounded text-orange-400 font-bold shrink-0 w-40 text-center shadow-inner">git remote add origin</code>
+                            <span>(5) Menghubungkan folder laptopmu dengan Link Repository GitHub.</span>
+                        </div>
+                        <div class="flex items-center gap-3 hover:bg-slate-800/50 transition-colors p-1 rounded">
+                            <code class="bg-black px-2 py-1 rounded text-emerald-400 font-bold shrink-0 w-40 text-center shadow-inner">git push -u origin main</code>
+                            <span>(6) <b>AKSI FINAL:</b> Mendorong file naik (upload) melintasi internet!</span>
                         </div>
                     </div>
 
                     <!-- Terminal Simulation -->
-                    <p class="text-xs text-yellow-400 mb-2 italic">Ayo Praktik! Ketik ke-5 urutan perintah di atas satu per satu di terminal hitam ini. Anggap URL Githubmu adalah "https://github.com/athaya/tugas.git"</p>
+                    <p class="text-xs text-yellow-400 mb-2 italic bg-yellow-900/20 p-2 rounded inline-block"><i class="fa-solid fa-keyboard"></i> <b>Ayo Praktik!</b> Untuk langkah (5), ketik saja perintahnya seperti ini: <br><code class="text-slate-200 bg-black px-1 ml-4">git remote add origin https://github.com/athaya/tugas.git</code></p>
                     <div class="bg-[#1e1e1e] rounded-xl border border-slate-700 overflow-hidden shadow-2xl font-mono text-sm h-64 flex flex-col mb-6" onclick="document.getElementById('git-input').focus()">
                         <div class="bg-[#2d2d2d] px-4 py-2 border-b border-slate-700 text-xs text-slate-400 flex gap-2">
                             <div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-yellow-500"></div><div class="w-3 h-3 rounded-full bg-green-500"></div>
                         </div>
                         <div class="p-4 flex-1 overflow-y-auto" id="git-terminal-body">
-                            <!-- logs -->
+                            <div class="text-slate-500 mb-2">Mulai ketik "git init" di bawah ini lalu tekan Enter...</div>
                         </div>
                         <div class="p-4 pt-0 terminal-input-wrapper">
                             <span class="text-emerald-400 mr-2">athaya@laptop:~$</span>
@@ -358,13 +394,10 @@
 
                     <div id="success-message" class="bg-emerald-900/40 border border-emerald-500 text-emerald-100 p-5 rounded-xl hidden">
                         <h3 class="font-bold flex items-center gap-2 mb-2 text-lg text-emerald-400">
-                            <i class="fa-solid fa-rocket"></i> PUSH BERHASIL! Sesi 1 Tamat!
+                            <i class="fa-solid fa-rocket animate-bounce"></i> PUSH BERHASIL! Modul Sesi 1 Tamat!
                         </h3>
-                        <p class="text-sm mb-2 text-emerald-100/90">
-                            Selamat! Kodemu sekarang sudah terbang dari laptopmu dan mendarat dengan aman di akun GitHub-mu di internet. 
-                        </p>
-                        <p class="text-xs text-emerald-200/60">
-                            (Dalam dunia nyata, saat perintah <i>git push</i> pertama kali, akan muncul pop-up browser meminta kamu login ke akun GitHub. Kamu cukup klik "Authorize").
+                        <p class="text-sm text-emerald-100/90 leading-relaxed">
+                            Luar biasa! Kamu telah menguasai fondasi utama seorang Mahasiswa IT: <b>Instalasi Detail &rarr; Coding &rarr; AI Prompting &rarr; Git Workflow</b> dengan sangat sempurna! Langkahmu menuju Telkom University kini sangat cerah.
                         </p>
                     </div>
 
@@ -373,7 +406,7 @@
         </main>
     </div>
 
-    <!-- STREAMING_CHUNK: Complex JS logic for Git Workflow -->
+    <!-- Javascript Logic -->
     <script>
         // Tab Management
         function switchTab(tabId) {
@@ -386,19 +419,32 @@
             document.getElementById(tabId).classList.add('active');
             const activeBtn = document.getElementById(`btn-${tabId}`);
             activeBtn.className = "w-full flex items-center gap-3 px-3 py-2.5 bg-blue-600/20 text-blue-400 rounded-lg text-sm font-medium transition-all text-left";
-            activeBtn.querySelector('span').className = "bg-blue-900 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold text-blue-300";
+            activeBtn.querySelector('span').className = "bg-blue-900 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold text-blue-300 shadow-sm";
         }
 
         function goToTab(tabId, curr, next) {
             document.getElementById('progress-bar').style.width = next + "%";
             document.getElementById('progress-text').innerText = next + "%";
             switchTab(tabId);
-            window.scrollTo(0,0);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function toggleAccordion(element) { element.classList.toggle('active'); }
 
-        // Python Code Logic
+        // AI Copy Prompt Function
+        function copyPrompt() {
+            const promptText = "Saya sedang belajar Python dan mendapat pesan error ini: [PASTE_ERROR_DI_SINI]. Tolong jelaskan kenapa error ini terjadi dan di mana letak kesalahan logika saya. TAPI, jangan berikan kodenya yang benar! Biar saya yang memperbaikinya sendiri.";
+            navigator.clipboard.writeText(promptText).then(() => {
+                // simple toast visual feedback
+                const toast = document.createElement('div');
+                toast.innerText = "Copied to clipboard!";
+                toast.className = "fixed bottom-5 right-5 bg-emerald-600 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-300 z-50";
+                document.body.appendChild(toast);
+                setTimeout(() => { toast.style.opacity = '0'; setTimeout(()=>toast.remove(),300); }, 2000);
+            });
+        }
+
+        // Python Code & AI Helper Logic
         function updateLineNumbers() {
             const lines = document.getElementById('code-editor').value.split('\n').length;
             document.getElementById('line-numbers').innerHTML = Array(lines).fill(0).map((_, i) => i + 1).join('<br>');
@@ -408,30 +454,49 @@
         function runCode() {
             const code = document.getElementById('code-editor').value;
             const output = document.getElementById('code-output');
+            const aiHelper = document.getElementById('ai-helper');
+            
             output.innerHTML = '';
+            aiHelper.classList.add('hidden'); // Sembunyikan AI helper dulu
             
             const lines = code.split('\n');
             let err = false;
-            lines.forEach(line => {
+            
+            lines.forEach((line, idx) => {
                 let t = line.trim();
                 if(t === '') return;
+                
+                // Cek apakah format print() benar. Regex ini menangani print("text") atau print('text')
                 const match = /^print\s*\(\s*(["'])(.*?)\1\s*\)$/.exec(t);
+                
                 if(match) {
                     const p = document.createElement('div'); p.innerText = match[2]; output.appendChild(p);
                 } else if(t.length > 0) {
                     err = true;
-                    const d = document.createElement('div'); d.className = 'text-red-500 font-bold';
-                    d.innerText = `SyntaxError: invalid syntax pada -> ${t}`; output.appendChild(d);
+                    const d = document.createElement('div'); d.className = 'text-red-500 font-bold bg-red-950/30 px-2 py-1 rounded mb-1';
+                    d.innerText = `File "biodata.py", line ${idx + 1}\nSyntaxError: invalid syntax pada -> ${t}`; 
+                    output.appendChild(d);
                 }
             });
-            if(err===false && lines.some(l => l.trim()!=='')) {
-                const s = document.createElement('div'); s.className = 'text-green-400 mt-2 text-xs border-t border-slate-700 pt-2';
-                s.innerText = '> Selesai.'; output.appendChild(s);
+            
+            // Logika memunculkan bantuan AI jika error
+            if(err) {
+                setTimeout(() => {
+                    aiHelper.classList.remove('hidden');
+                    aiHelper.scrollIntoView({behavior: "smooth", block: "center"});
+                }, 400);
+            } 
+            // Jika berhasil
+            else if(lines.some(l => l.trim()!=='')) {
+                const s = document.createElement('div'); s.className = 'text-green-400 mt-2 text-xs border-t border-slate-700 pt-2 font-bold';
+                s.innerText = '> Program Selesai (exit code 0).'; output.appendChild(s);
+            } else {
+                output.innerHTML = '<span class="text-slate-600 italic">Tidak ada kode untuk dijalankan.</span>';
             }
         }
 
         // --- Advanced Git Simulation Logic ---
-        // States: 0(none) -> 1(init) -> 2(add) -> 3(commit) -> 4(remote added) -> 5(pushed)
+        // States: 0(none)->1(init)->2(add)->3(commit)->4(branch main)->5(remote)->6(push)
         let gitState = 0; 
         const terminal = document.getElementById('git-terminal-body');
 
@@ -441,7 +506,7 @@
             terminal.appendChild(cDiv);
             if(res) {
                 const rDiv = document.createElement('div');
-                rDiv.className = err ? 'text-red-400 mb-2 whitespace-pre-wrap' : 'text-slate-300 mb-2 whitespace-pre-wrap';
+                rDiv.className = err ? 'text-red-400 mb-3 whitespace-pre-wrap' : 'text-slate-300 mb-3 whitespace-pre-wrap';
                 rDiv.innerText = res;
                 terminal.appendChild(rDiv);
             }
@@ -455,47 +520,62 @@
                 input.value = '';
                 if(rawCmd === '') return;
 
-                // Simple parser
                 if(rawCmd === 'git init') {
-                    if(gitState === 0) { logTerminal(rawCmd, "Initialized empty Git repository in C:/Users/Athaya/project/.git/"); gitState = 1; }
+                    if(gitState === 0) { logTerminal(rawCmd, "Initialized empty Git repository in C:/Users/athaya/tugas/.git/"); gitState = 1; }
                     else { logTerminal(rawCmd, "Reinitialized existing Git repository."); }
                 }
                 else if(rawCmd === 'git add .') {
                     if(gitState >= 1) { logTerminal(rawCmd, ""); gitState = gitState === 1 ? 2 : gitState; }
-                    else { logTerminal(rawCmd, "fatal: not a git repository", true); }
+                    else { logTerminal(rawCmd, "fatal: not a git repository (did you run git init?)", true); }
                 }
                 else if(rawCmd.startsWith('git commit')) {
-                    if(gitState === 2 && rawCmd.includes('-m')) {
-                        logTerminal(rawCmd, "[master (root-commit) 84f2b9a] init\n 1 file changed, 2 insertions(+)"); gitState = 3;
+                    if(gitState >= 2 && rawCmd.includes('-m')) {
+                        logTerminal(rawCmd, "[master (root-commit) 84f2b9a] initial commit\n 1 file changed, 2 insertions(+)"); 
+                        gitState = gitState === 2 ? 3 : gitState;
                     } else if(gitState < 2) {
-                        logTerminal(rawCmd, "nothing added to commit", true);
+                        logTerminal(rawCmd, "nothing added to commit but untracked files present (did you run git add .?)", true);
                     } else {
-                        logTerminal(rawCmd, "error: please provide message -m", true);
+                        logTerminal(rawCmd, "error: please provide commit message using -m \"message\"", true);
+                    }
+                }
+                else if(rawCmd === 'git branch -M main') {
+                    if(gitState >= 3) {
+                        logTerminal(rawCmd, ""); gitState = 4;
+                    } else {
+                        logTerminal(rawCmd, "error: refname refs/heads/master not found (Lakukan commit dulu sebelum mengubah nama cabang!)", true);
                     }
                 }
                 else if(rawCmd.startsWith('git remote add origin')) {
-                    if(gitState >= 1) {
+                    if(gitState >= 3) {
                         const parts = rawCmd.split(' ');
+                        // Cek kalau ada URL nya (ada http/https)
                         if(parts.length >= 5 && parts[4].includes('http')) {
-                            logTerminal(rawCmd, ""); gitState = 4;
+                            logTerminal(rawCmd, ""); gitState = 5;
                         } else {
-                            logTerminal(rawCmd, "usage: git remote add origin <url>", true);
+                            logTerminal(rawCmd, "usage: git remote add origin <url>\nJangan lupa masukkan link http-nya setelah tulisan origin!", true);
                         }
                     } else { logTerminal(rawCmd, "fatal: not a git repository", true); }
                 }
-                else if(rawCmd === 'git push -u origin master' || rawCmd === 'git push') {
-                    if(gitState === 4) {
-                        logTerminal(rawCmd, "Enumerating objects: 3, done.\nCounting objects: 100% (3/3), done.\nWriting objects: 100% (3/3), 256 bytes | 256.00 KiB/s, done.\nTotal 3 (delta 0), reused 0 (delta 0)\nTo https://github.com/athaya/tugas.git\n * [new branch]      master -> master\nBranch 'master' set up to track remote branch 'master' from 'origin'.");
-                        gitState = 5;
-                        setTimeout(() => document.getElementById('success-message').classList.remove('hidden'), 600);
-                    } else if (gitState === 3) {
-                        logTerminal(rawCmd, "fatal: No configured push destination.\nEither specify the URL from the command-line or configure a remote repository using\n\n    git remote add <name> <url>", true);
+                else if(rawCmd === 'git push -u origin main' || rawCmd === 'git push origin main') {
+                    if(gitState === 5) {
+                        logTerminal(rawCmd, "Enumerating objects: 3, done.\nCounting objects: 100% (3/3), done.\nWriting objects: 100% (3/3), 256 bytes | 256.00 KiB/s, done.\nTotal 3 (delta 0)\nTo https://github.com/athaya/tugas.git\n * [new branch]      main -> main\nBranch 'main' set up to track remote branch 'main' from 'origin'.");
+                        gitState = 6;
+                        setTimeout(() => {
+                            const successMsg = document.getElementById('success-message');
+                            successMsg.classList.remove('hidden');
+                            successMsg.classList.add('animate-[fadeIn_0.6s_ease-out]');
+                            successMsg.scrollIntoView({behavior: "smooth", block: "center"});
+                        }, 800);
+                    } else if (gitState === 3 && rawCmd.includes('main')) {
+                        logTerminal(rawCmd, "error: src refspec main does not match any\n(Apakah kamu lupa mengubah nama cabang menggunakan 'git branch -M main'?)", true);
+                    } else if (gitState < 5) {
+                        logTerminal(rawCmd, "fatal: No configured push destination.\n(Apakah kamu lupa menambahkan remote URL menggunakan 'git remote add origin'?)", true);
                     } else {
-                        logTerminal(rawCmd, "error: everything up-to-date or no remote configured", true);
+                        logTerminal(rawCmd, "error: failed to push", true);
                     }
                 }
                 else {
-                    logTerminal(rawCmd, "command not recognized in simulator. Try the exact commands listed above.", true);
+                    logTerminal(rawCmd, `bash: ${rawCmd}: command not recognized in this simulator. Please follow the 6 steps listed above exactly.`, true);
                 }
             }
         }

@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sesi 2: Variabel, Tipe Data & Kalkulator IPK</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #0f172a; color: #f8fafc; }
+        .code-font { font-family: 'Fira Code', monospace; }
+        .tab-content { display: none; animation: fadeIn 0.4s ease-out forwards; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+        #code-editor { background-color: transparent; color: #e2e8f0; caret-color: #a855f7; resize: none; outline: none; line-height: 1.5; }
+        .terminal-input-wrapper { display: flex; align-items: center; }
+        .terminal-input { background: transparent; border: none; color: #e2e8f0; outline: none; flex: 1; font-family: 'Fira Code', monospace; margin-left: 8px; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #1e293b; }
+        ::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-slate-900 border-b border-slate-800 sticky top-0 z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="bg-purple-600 text-white p-2 rounded-lg shadow-lg shadow-purple-500/20">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm sm:text-lg leading-tight">Telkom Univ IT Prep</h1>
+                    <p class="text-xs text-slate-400">Sesi 2: Variabel, Tipe Data & Kalkulator IPK</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <div class="bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 items-center gap-2 flex">
+                    <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span class="text-xs font-medium text-slate-300">Progress: <span id="progress-text">25%</span></span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex-1 max-w-7xl mx-auto w-full flex flex-col md:flex-row pt-6 px-4 sm:px-6 lg:px-8 gap-6 pb-12">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="w-full md:w-64 shrink-0">
+            <div class="bg-slate-800 rounded-xl border border-slate-700 sticky top-24 overflow-hidden shadow-xl">
+                <div class="p-4 bg-slate-800 border-b border-slate-700">
+                    <h2 class="font-semibold text-sm text-slate-200 mb-2">Alur Modul Sesi 2</h2>
+                    <div class="w-full bg-slate-900 rounded-full h-2 shadow-inner">
+                        <div id="progress-bar" class="bg-purple-500 h-2 rounded-full transition-all duration-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]" style="width: 25%"></div>
+                    </div>
+                </div>
+                <nav class="p-2 space-y-1">
+                    <button onclick="switchTab('tab1')" id="btn-tab1" class="w-full flex items-center gap-3 px-3 py-2.5 bg-purple-600/20 text-purple-400 rounded-lg text-sm font-medium transition-all text-left">
+                        <span class="bg-purple-900 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold text-purple-300">1</span> Konsep Kotak
+                    </button>
+                    <button onclick="switchTab('tab2')" id="btn-tab2" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-700/50 rounded-lg text-sm font-medium transition-all text-left">
+                        <span class="bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold">2</span> TypeError & AI
+                    </button>
+                    <button onclick="switchTab('tab3')" id="btn-tab3" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-700/50 rounded-lg text-sm font-medium transition-all text-left">
+                        <span class="bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold">3</span> Kalkulator IPK
+                    </button>
+                    <button onclick="switchTab('tab4')" id="btn-tab4" class="w-full flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-700/50 rounded-lg text-sm font-medium transition-all text-left">
+                        <span class="bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold">4</span> Git Update
+                    </button>
+                </nav>
+            </div>
+        </aside>
+
+        <main class="flex-1 min-w-0">
+            
+            <!-- TAB 1: KONSEP -->
+            <section id="tab1" class="tab-content active">
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 sm:p-8 shadow-xl">
+                    <h2 class="text-2xl font-bold mb-3">Variabel: Si "Kotak Penyimpanan"</h2>
+                    <p class="text-slate-300 text-sm mb-6 leading-relaxed">
+                        Di Sesi 1, kita langsung mencetak teks panjang. Di dunia nyata, data itu dinamis (berubah-ubah). Kita butuh tempat untuk menyimpan data tersebut agar bisa diolah. Tempat itu bernama <b>Variabel</b>.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
+                        <!-- Variabel -->
+                        <div class="bg-slate-900 border border-slate-700 p-5 rounded-xl">
+                            <div class="w-10 h-10 rounded-full bg-purple-900/50 text-purple-400 flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-box"></i></div>
+                            <h3 class="font-bold text-slate-100 mb-2">1. Variabel = Kotak Label</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-3">
+                                Bayangkan variabel adalah kardus yang kamu tempeli label nama. Kamu bisa memasukkan barang ke dalamnya menggunakan tanda sama dengan <code>=</code>. <br><br>Contoh: <code>nama = "Athaya"</code> (Artinya: Masukkan teks "Athaya" ke dalam kotak bernama 'nama').
+                            </p>
+                        </div>
+
+                        <!-- Tipe Data -->
+                        <div class="bg-slate-900 border border-slate-700 p-5 rounded-xl">
+                            <div class="w-10 h-10 rounded-full bg-blue-900/50 text-blue-400 flex items-center justify-center mb-4 text-xl"><i class="fa-solid fa-shapes"></i></div>
+                            <h3 class="font-bold text-slate-100 mb-2">2. Tipe Data = Jenis Barang</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed mb-3">
+                                Barang yang masuk kotak punya jenis berbeda:
+                                <br>• <b>String (str):</b> Teks/tulisan. Wajib pakai tanda kutip <code>"..."</code>
+                                <br>• <b>Integer (int):</b> Angka bulat (contoh: <code>90</code>)
+                                <br>• <b>Float (float):</b> Angka desimal (contoh: <code>3.5</code>. Ingat, koma ditulis titik!)
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="bg-red-900/20 border border-red-500/30 p-4 rounded-xl flex items-start gap-4 mb-6">
+                        <i class="fa-solid fa-triangle-exclamation text-red-400 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-red-300 text-sm mb-1">Hukum Alam Python (Casting):</h4>
+                            <p class="text-xs text-slate-300 leading-relaxed">
+                                Kamu <b>TIDAK BISA</b> menjumlahkan Teks (String) dengan Angka (Integer). Komputer akan bingung dan memunculkan <i>TypeError</i>. Jika ingin menggabungkannya, kamu harus menyamakan wujudnya dengan mengubah angka menjadi teks menggunakan mantra <b><code>str()</code></b>.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end pt-4 border-t border-slate-700">
+                        <button onclick="goToTab('tab2', 25, 50)" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2 shadow-lg">
+                            Lanjut ke Praktik <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: NGODING 1 (TypeError) -->
+            <section id="tab2" class="tab-content">
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 sm:p-8 shadow-xl">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">Praktik 1: Jebakan TypeError</h2>
+                        <div class="bg-blue-500/10 text-blue-400 px-3 py-1 rounded-lg text-xs font-semibold border border-blue-500/20"><i class="fa-solid fa-robot"></i> Latihan Debugging</div>
+                    </div>
+                    
+                    <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                        Di bawah ini ada program untuk mencetak nilai algoritma. Sayangnya, program ini <b>menggabungkan String (teks) dengan Integer (angka)</b> menggunakan tanda <code>+</code>. Coba klik 'Run Code' untuk melihat pesan errornya.
+                    </p>
+
+                    <!-- Kode Area -->
+                    <div class="bg-[#1e1e1e] rounded-xl border border-slate-700 overflow-hidden shadow-2xl mb-6 font-mono text-sm relative">
+                        <div class="bg-[#2d2d2d] px-4 py-2 flex justify-between border-b border-slate-700">
+                            <div class="flex items-center gap-3"><i class="fa-brands fa-python text-blue-400"></i><span class="text-slate-300 text-xs">nilai_mhs.py</span></div>
+                            <button onclick="runCode1()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-1.5 rounded text-xs font-bold transition-colors flex items-center gap-1">
+                                <i class="fa-solid fa-play"></i> Run Code
+                            </button>
+                        </div>
+                        <div class="flex">
+                            <div class="bg-[#1e1e1e] border-r border-slate-700 text-slate-500 p-4 text-right select-none w-12" id="line-numbers-1">1<br>2<br>3</div>
+                            <textarea id="code-editor-1" class="w-full h-32 p-4 code-font bg-transparent" spellcheck="false" oninput="updateLineNumbers1()">nama = "Athaya"&#10;nilai_algoritma = 90&#10;print("Nilai " + nama + " adalah: " + nilai_algoritma)</textarea>
+                        </div>
+                    </div>
+
+                    <div class="bg-black rounded-xl p-4 font-mono text-sm border border-slate-700 h-28 overflow-y-auto mb-6 shadow-inner">
+                        <div class="text-slate-500 text-xs mb-2">TERMINAL OUTPUT:</div>
+                        <div id="code-output-1" class="text-slate-300 break-words whitespace-pre-wrap"></div>
+                    </div>
+
+                    <!-- AI Helper Alert Dinamis -->
+                    <div id="ai-helper-1" class="bg-red-950/60 border border-red-500/50 rounded-xl p-5 hidden transition-all mb-6">
+                        <h3 class="text-red-400 font-bold flex items-center gap-2 mb-2 text-sm"><i class="fa-solid fa-wand-magic-sparkles"></i> Tutor AI: Membaca TypeError</h3>
+                        <p class="text-xs text-slate-300 mb-3 leading-relaxed">
+                            Error <code>TypeError: can only concatenate str (not "int") to str</code> artinya: <i>"Komputer bingung! Kamu menyuruhnya menggabungkan Teks dengan Angka Bulat (int) pakai tanda +"</i>.<br><br>
+                            <b>Solusi (Casting):</b> Bungkus variabel angkamu dengan perintah <code>str()</code> untuk mengubah wujudnya menjadi teks sementara. <br>
+                            Ubah bagian <code>+ nilai_algoritma</code> menjadi <code>+ str(nilai_algoritma)</code>, lalu Run lagi!
+                        </p>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-700 mt-6">
+                        <p class="text-xs text-slate-400">Ikuti saran AI di atas sampai kodenya berhasil jalan.</p>
+                        <button onclick="goToTab('tab3', 50, 75)" id="btn-next-2" class="opacity-50 pointer-events-none bg-purple-600 text-white px-6 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2">
+                            Berhasil! Lanjut Kalkulator <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- TAB 3: NGODING 2 (Kalkulator) -->
+            <section id="tab3" class="tab-content">
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 sm:p-8 shadow-xl">
+                    <h2 class="text-2xl font-bold mb-2">Praktik 2: Kalkulator IPK Sederhana</h2>
+                    <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                        Sekarang mari kita manfaatkan operasi matematika ( <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> ). <br>
+                        Tugasmu: Lengkapi baris ke-4 dan ke-5 di bawah ini untuk menghitung total SKS dan rata-rata (IPK). Ingat rumus IPK = Total Nilai / Total SKS.
+                    </p>
+
+                    <!-- Kode Area -->
+                    <div class="bg-[#1e1e1e] rounded-xl border border-slate-700 overflow-hidden shadow-2xl mb-6 font-mono text-sm relative">
+                        <div class="bg-[#2d2d2d] px-4 py-2 flex justify-between border-b border-slate-700">
+                            <div class="flex items-center gap-3"><i class="fa-brands fa-python text-blue-400"></i><span class="text-slate-300 text-xs">kalkulator_ipk.py</span></div>
+                            <button onclick="runCode2()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-1.5 rounded text-xs font-bold transition-colors flex items-center gap-1 shadow-lg">
+                                <i class="fa-solid fa-play"></i> Run Code
+                            </button>
+                        </div>
+                        <div class="flex">
+                            <div class="bg-[#1e1e1e] border-r border-slate-700 text-slate-500 p-4 text-right select-none w-12" id="line-numbers-2">1<br>2<br>3<br>4<br>5<br>6</div>
+                            <textarea id="code-editor-2" class="w-full h-48 p-4 code-font bg-transparent" spellcheck="false" oninput="updateLineNumbers2()">sks_matematika = 3&#10;sks_bahasa = 2&#10;&#10;total_sks = # Tambahkan sks_matematika dengan sks_bahasa di sini&#10;total_nilai = 18.5 # Anggap saja ini total perkalian nilainya&#10;&#10;ipk = total_nilai / total_sks&#10;print("Total SKS saya adalah: " + str(total_sks))&#10;print("IPK saya semester ini: " + str(ipk))</textarea>
+                        </div>
+                    </div>
+
+                    <div class="bg-black rounded-xl p-4 font-mono text-sm border border-slate-700 h-32 overflow-y-auto mb-6 shadow-inner">
+                        <div class="text-slate-500 text-xs mb-2">TERMINAL OUTPUT:</div>
+                        <div id="code-output-2" class="text-slate-300 break-words whitespace-pre-wrap"></div>
+                    </div>
+
+                    <div class="flex justify-between items-center pt-4 border-t border-slate-700 mt-6">
+                        <p class="text-xs text-slate-400"><i class="fa-solid fa-lightbulb text-yellow-500"></i> Clue: Ganti tanda `# Tambahkan...` dengan <code>sks_matematika + sks_bahasa</code></p>
+                        <button onclick="goToTab('tab4', 75, 100)" id="btn-next-3" class="opacity-50 pointer-events-none bg-purple-600 hover:bg-purple-700 text-white px-6 py-2.5 rounded-lg font-medium transition-all flex items-center gap-2">
+                            Lanjut Save ke Git <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: GIT UPDATE -->
+            <section id="tab4" class="tab-content">
+                <div class="bg-slate-800 rounded-xl border border-slate-700 p-5 sm:p-8 shadow-xl">
+                    <h2 class="text-2xl font-bold mb-2 text-emerald-400"><i class="fa-brands fa-git-alt"></i> Final: Push Update Kode</h2>
+                    <p class="text-slate-300 text-sm mb-4 leading-relaxed">
+                        Di Sesi 1, kamu sudah melakukan <code>git init</code> dan <code>git remote</code>. Nah, perintah tersebut <b>cukup dilakukan 1x saja seumur hidup</b> di folder ini. <br>
+                        Untuk sesi-sesi selanjutnya, karena kamu hanya <b>mengupdate</b> file (menambahkan kalkulator_ipk.py), kamu hanya butuh 3 mantra rutinan ini!
+                    </p>
+                    
+                    <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-700 mb-6 text-xs text-slate-300 space-y-3">
+                        <div class="flex items-center gap-3 border-b border-slate-700/50 pb-2">
+                            <code class="bg-black px-2 py-1 rounded text-blue-400 font-bold shrink-0 w-36 text-center">git add .</code>
+                            <span>(1) Masukkan perubahan baru ke koper.</span>
+                        </div>
+                        <div class="flex items-center gap-3 border-b border-slate-700/50 pb-2">
+                            <code class="bg-black px-2 py-1 rounded text-blue-400 font-bold shrink-0 w-36 text-center">git commit -m "sesi2"</code>
+                            <span>(2) Simpan checkpoint update Sesi 2.</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <code class="bg-black px-2 py-1 rounded text-emerald-400 font-bold shrink-0 w-36 text-center">git push</code>
+                            <span>(3) <b>Langsung Push!</b> (Tidak perlu -u origin main lagi).</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#1e1e1e] rounded-xl border border-slate-700 overflow-hidden shadow-2xl font-mono text-sm h-64 flex flex-col mb-6" onclick="document.getElementById('git-input').focus()">
+                        <div class="bg-[#2d2d2d] px-4 py-2 border-b border-slate-700 text-xs text-slate-400 flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-yellow-500"></div><div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="p-4 flex-1 overflow-y-auto" id="git-terminal-body">
+                            <div class="text-slate-500 mb-2">Simulasi Terminal: Mulai ketik 3 mantra update di atas...</div>
+                        </div>
+                        <div class="p-4 pt-0 terminal-input-wrapper">
+                            <span class="text-emerald-400 mr-2">athaya@laptop:~/tugas$</span>
+                            <input type="text" id="git-input" class="terminal-input" autocomplete="off" onkeydown="handleGitInput(event)">
+                        </div>
+                    </div>
+
+                    <div id="success-message" class="bg-emerald-900/40 border border-emerald-500 text-emerald-100 p-5 rounded-xl hidden">
+                        <h3 class="font-bold flex items-center gap-2 mb-2 text-lg text-emerald-400">
+                            <i class="fa-solid fa-party-horn"></i> Mantap! Sesi 2 Selesai!
+                        </h3>
+                        <p class="text-sm text-emerald-100/90">
+                            Sekarang kamu sudah mengerti bedanya String (teks) dan Integer (angka), cara mengubah wujudnya (Casting), dan bagaimana cara nge-push *update* ke GitHub.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Javascript Logic -->
+    <script>
+        // Tab Management
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('[id^="btn-tab"]').forEach(btn => {
+                btn.className = "w-full flex items-center gap-3 px-3 py-2.5 text-slate-400 hover:bg-slate-700/50 rounded-lg text-sm font-medium transition-all text-left";
+                btn.querySelector('span').className = "bg-slate-700 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold";
+            });
+
+            document.getElementById(tabId).classList.add('active');
+            const activeBtn = document.getElementById(`btn-${tabId}`);
+            activeBtn.className = "w-full flex items-center gap-3 px-3 py-2.5 bg-purple-600/20 text-purple-400 rounded-lg text-sm font-medium transition-all text-left";
+            activeBtn.querySelector('span').className = "bg-purple-900 w-6 h-6 flex items-center justify-center rounded-full text-xs font-bold text-purple-300 shadow-sm";
+        }
+
+        function goToTab(tabId, curr, next) {
+            document.getElementById('progress-bar').style.width = next + "%";
+            document.getElementById('progress-text').innerText = next + "%";
+            switchTab(tabId);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Code Editor 1 (TypeError Simulation)
+        function updateLineNumbers1() {
+            const lines = document.getElementById('code-editor-1').value.split('\n').length;
+            document.getElementById('line-numbers-1').innerHTML = Array(lines).fill(0).map((_, i) => i + 1).join('<br>');
+        }
+        updateLineNumbers1();
+
+        function runCode1() {
+            const code = document.getElementById('code-editor-1').value;
+            const output = document.getElementById('code-output-1');
+            const aiHelper = document.getElementById('ai-helper-1');
+            const nextBtn = document.getElementById('btn-next-2');
+            
+            output.innerHTML = '';
+            aiHelper.classList.add('hidden');
+            
+            // Very simple parser for educational simulation
+            if (code.includes('print("Nilai " + nama + " adalah: " + nilai_algoritma)')) {
+                // Sengaja error
+                const err = document.createElement('div');
+                err.className = 'text-red-500 font-bold bg-red-950/30 px-2 py-1 rounded';
+                err.innerText = `Traceback (most recent call last):\n  File "nilai_mhs.py", line 3, in <module>\nTypeError: can only concatenate str (not "int") to str`;
+                output.appendChild(err);
+                
+                setTimeout(() => {
+                    aiHelper.classList.remove('hidden');
+                    aiHelper.classList.add('animate-[fadeIn_0.5s_ease-out]');
+                }, 500);
+            } 
+            else if (code.includes('str(nilai_algoritma)')) {
+                // Berhasil diperbaiki
+                const res = document.createElement('div');
+                res.className = 'text-slate-300';
+                res.innerText = `Nilai Athaya adalah: 90\n\n`;
+                
+                const succ = document.createElement('div');
+                succ.className = 'text-emerald-400 text-xs mt-2 border-t border-slate-700 pt-2';
+                succ.innerText = '> Program Selesai (exit code 0)';
+                
+                output.appendChild(res);
+                output.appendChild(succ);
+                
+                // Aktifkan tombol next
+                nextBtn.classList.remove('opacity-50', 'pointer-events-none');
+                nextBtn.classList.add('hover:bg-purple-700');
+            } else {
+                 output.innerHTML = '<span class="text-red-400">SyntaxError: Perhatikan penulisan str() nya ya! Pastikan kode baris 3 menjadi: print("Nilai " + nama + " adalah: " + str(nilai_algoritma))</span>';
+            }
+        }
+
+        // Code Editor 2 (Kalkulator IPK)
+        function updateLineNumbers2() {
+            const lines = document.getElementById('code-editor-2').value.split('\n').length;
+            document.getElementById('line-numbers-2').innerHTML = Array(lines).fill(0).map((_, i) => i + 1).join('<br>');
+        }
+        updateLineNumbers2();
+
+        function runCode2() {
+            const code = document.getElementById('code-editor-2').value;
+            const output = document.getElementById('code-output-2');
+            const nextBtn = document.getElementById('btn-next-3');
+            
+            output.innerHTML = '';
+            
+            // Check if user correctly replaced the comment with the math operation
+            const regexMath = /total_sks\s*=\s*sks_matematika\s*\+\s*sks_bahasa/;
+            
+            if (regexMath.test(code)) {
+                // Berhasil menghitung
+                const res = document.createElement('div');
+                res.className = 'text-slate-300';
+                res.innerText = `Total SKS saya adalah: 5\nIPK saya semester ini: 3.7\n`;
+                
+                const succ = document.createElement('div');
+                succ.className = 'text-emerald-400 text-xs mt-2 border-t border-slate-700 pt-2';
+                succ.innerText = '> Kalkulasi Selesai!';
+                
+                output.appendChild(res);
+                output.appendChild(succ);
+                
+                nextBtn.classList.remove('opacity-50', 'pointer-events-none');
+            } else {
+                 output.innerHTML = '<span class="text-red-400">Error: Kamu belum menjumlahkan SKS nya. Hapus tanda pagar #, lalu ketik: sks_matematika + sks_bahasa</span>';
+            }
+        }
+
+        // --- Git Update Simulator ---
+        let gitState = 0; 
+        const terminal = document.getElementById('git-terminal-body');
+
+        function logTerminal(cmd, res, err = false) {
+            const cDiv = document.createElement('div');
+            cDiv.innerHTML = `<span class="text-emerald-400">athaya@laptop:~/tugas$</span> ${cmd}`;
+            terminal.appendChild(cDiv);
+            if(res) {
+                const rDiv = document.createElement('div');
+                rDiv.className = err ? 'text-red-400 mb-3 whitespace-pre-wrap' : 'text-slate-300 mb-3 whitespace-pre-wrap';
+                rDiv.innerText = res;
+                terminal.appendChild(rDiv);
+            }
+            terminal.parentElement.scrollTop = terminal.parentElement.scrollHeight;
+        }
+
+        function handleGitInput(e) {
+            if (e.key === 'Enter') {
+                const input = document.getElementById('git-input');
+                const rawCmd = input.value.trim();
+                input.value = '';
+                if(rawCmd === '') return;
+
+                if(rawCmd === 'git init' || rawCmd.includes('remote add')) {
+                    logTerminal(rawCmd, "Error: Kamu sudah melakukan ini di Sesi 1. Tidak perlu diulang lagi untuk folder yang sama!", true);
+                }
+                else if(rawCmd === 'git add .') {
+                    logTerminal(rawCmd, ""); gitState = 1;
+                }
+                else if(rawCmd.startsWith('git commit')) {
+                    if(gitState >= 1 && rawCmd.includes('-m')) {
+                        logTerminal(rawCmd, "[main 2f8c5b3] sesi2 kalkulator ipk\n 1 file changed, 8 insertions(+)"); 
+                        gitState = 2;
+                    } else if(gitState < 1) {
+                        logTerminal(rawCmd, "nothing added to commit (Lupa git add . ya?)", true);
+                    } else {
+                        logTerminal(rawCmd, "error: please provide commit message using -m \"pesan\"", true);
+                    }
+                }
+                else if(rawCmd === 'git push' || rawCmd === 'git push origin main') {
+                    if(gitState === 2) {
+                        logTerminal(rawCmd, "Enumerating objects: 5, done.\nCounting objects: 100% (5/5), done.\nWriting objects: 100% (3/3), 300 bytes | 300.00 KiB/s, done.\nTotal 3 (delta 1), reused 0\nTo https://github.com/athaya/tugas.git\n   84f2b9a..2f8c5b3  main -> main");
+                        setTimeout(() => {
+                            const successMsg = document.getElementById('success-message');
+                            successMsg.classList.remove('hidden');
+                            successMsg.classList.add('animate-[fadeIn_0.6s_ease-out]');
+                            successMsg.scrollIntoView({behavior: "smooth", block: "center"});
+                        }, 500);
+                    } else if (gitState < 2) {
+                        logTerminal(rawCmd, "error: nothing to push. (Apakah kamu sudah commit?)", true);
+                    }
+                }
+                else {
+                    logTerminal(rawCmd, `bash: ${rawCmd}: command not recognized in this simulator. Focus on the 3 update steps.`, true);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+```eof
